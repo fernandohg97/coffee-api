@@ -1,0 +1,24 @@
+<html lang="en">
+<% include partials/head %>
+<body>
+    <h1>Coffee Menu</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Costo</th>
+            <th>Imagen</th>
+        </tr>
+        <% for(let i = 0; i < products.length; i++) { %>
+        <tr>
+            <td><%= products[i].product_name %></td>
+            <td><%= products[i].cost %></td>
+            <td><%= products[i].product_image || 'N/A' %></td>
+        </tr>
+        <% } %>
+    </table>
+</body>
+</html>
+
+
+
+
