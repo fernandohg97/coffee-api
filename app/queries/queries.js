@@ -3,8 +3,8 @@ const product = {
 	getProduct: 'select product_name, cost, product_image from product where product_id = ?;',
 	getProductByName: 'call getProductByName(?);',
 	getProductByCost: 'call getProductByCost(?);',
-	newProduct: 'call newProduct(?, ?, ?);',
-	updateProduct: 'call updateProduct(?, ?, ?, ?);',
+	newProduct: 'insert into product set ?;',
+	updateProduct: 'update product set ? where product_id = ?;',
 	removeProduct: 'call removeProduct(?);'
 }
 
