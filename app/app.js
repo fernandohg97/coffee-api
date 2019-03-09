@@ -4,6 +4,10 @@ const path = require('path')
 const logger = require('morgan')
 const methodOverride = require('method-override')
 
+// Declare local variable
+app.locals.title = 'Coffee Menu'
+
+// Define app settings
 app.set('env', process.env.NODE_ENV || 'development')
 app.set('views', path.join(__dirname, '/views'))
 app.set('view engine', 'ejs')
@@ -32,8 +36,9 @@ app.use(function (req, res, next) {
 // Routes
 const productRouter = require('./routes/product.route')
 
+app.use('/api', productRouter)
 
-app.use('/', productRouter)
-
+// Middleware to handle main route
+app.use('/', (req, res) => { res.render('index') })
 
 module.exports = app
