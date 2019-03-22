@@ -19,6 +19,7 @@ app.use(logger('dev'))
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
+
 // Error handler
 app.use(function (err, req, res, next) {
 	console.error('error: ' + err.stack)
@@ -33,12 +34,22 @@ app.use(function (req, res, next) {
 	next()
 })
 
+// Handle unsplash authorization
+app.use(require('./middlewares/auth').isAuth)
+
 // Routes
+const unsplashRouter = require('./routes/unsplash.route')
 const productRouter = require('./routes/product.route')
 
+app.use('/unsplash', unsplashRouter)
 app.use('/api', productRouter)
 
+// Handle 404 Http errors
+app.use((req, res, next) => {
+	res.status(404).json({message: 'Resource not found', status: res.statusCode})
+})
+
 // Middleware to handle main route
-app.use('/', (req, res) => { res.render('index') })
+// app.use('/', (req, res) => { res.render('index') })
 
 module.exports = app
