@@ -1,10 +1,36 @@
 html {
-    margin: 0;
-    padding: 0;
     font-family: 'Montserrat',sans-serif;
 }
 
 body {
+    margin: 0;
+    padding: 0;
     height: 100%;
-    width: auto;
+    /* width: auto; */
+}
+
+.wrapper {
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    margin-top: 10em;
+    border: solid thin black;
+    display: block;
+    position: relative;
+}
+
+
+.title {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-btn {
+    display: block;
+    margin-top: 2em;
+    text-decoration: none;
+    color: white;
+    background: #000000;
+    width: 10%;backface-visibility: 43px;wq /
 }
