@@ -2,7 +2,7 @@
   "name": "unsplash-app",
   "version": "1.0.0",
   "description": "Playing with Unsplash API",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
