@@ -1,14 +1,14 @@
 const express = require('express')
-const router = express.Router()
+const productRouter = express.Router()
 const product = require('../controllers/product.controller')
 
 // Endpoints
-router.get('/products/name', product.getProductByName) // Get product by name
-router.get('/products/cost', product.getProductByCost) // Get product by cost
-router.get('/products', product.getProducts) // Get all products
-router.get('/products/:product_id', product.getProduct) // Get just one product
-router.post('/products', product.newProduct) // Create new product
-router.put('/products/:product_id', product.updateProduct) // Update an existing product
-router.delete('/products/:product_id', product.removeProduct) // Remove one product
+productRouter.get('/products/name', product.getProductByName) // Get product by name
+// productRouter.get('/products/cost', product.getProductByCost) // Get product by cost
+productRouter.get('/products', product.getProducts) // Get all products
+productRouter.get('/products/:product_id', product.getProduct) // Get just one product
+productRouter.post('/products', product.newProduct) // Create new product
+productRouter.put('/products/:product_id', product.updateProduct) // Update an existing product
+productRouter.delete('/products/:product_id', product.removeProduct) // Remove one product
 
-module.exports = router
+module.exports = productRouter
