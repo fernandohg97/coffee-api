@@ -21,8 +21,14 @@ function getPhotoByName(req, res) {
 	if (Object.getOwnPropertyNames(userSearch).length != 0) { // In case the search form was filled by the user
 
 		fetch(`${res.locals.unsplashUrl}&query=${userSearch.keyword}`)
-			.then(response => response.json())
-			.then(body => res.send(body))
+			.then(checkStatus)
+			.then(body => {
+				if (!body.results.length) {
+					res.status(404).send({message: 'No photos found'})
+				} else {
+					res.send(body)
+				}
+			})
 			.catch(err => console.error(err))
 
 	} else { // In case the user doesn't type any value
