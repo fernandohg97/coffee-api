@@ -1,4 +1,3 @@
-const express = require('express')
 const config = require('../config/unsplash')
 
 const isAuth = (req, res, next) => {
