@@ -1,11 +1,28 @@
 const product = {
-	getProducts: 'call getProducts();',
-	getProduct: 'select product_name, cost, product_image from product where product_id = ?;',
+	getProducts: 'call getAllProducts();',
+	getProduct: 'call getOneProduct(?);',
 	getProductByName: 'call getProductByName(?);',
-	getProductByCost: 'call getProductByCost(?);',
-	newProduct: 'insert into product set ?;',
-	updateProduct: 'update product set ? where product_id = ?;',
+	newProduct: 'call newProduct(?, ?, ?);',
+	updateProduct: 'call updateProduct(?, ?, ?, ?);',
 	removeProduct: 'call removeProduct(?);'
 }
 
-module.exports = product
+const variant = {
+	newVariant: 'call newVariant(?);'
+}
+
+const sku = {
+	newSku: 'call newSku(?, ?);'
+}
+
+const variantValues = {
+	newVariantValues: 'call newVariantValues(?, ?, ?);'
+}
+
+
+module.exports = {
+	product,
+	variant,
+	sku,
+	variantValues
+}
