@@ -15,7 +15,6 @@ function getPhotoByName(req, res) {
 
 	// Get the user search terms from the body
 	let userSearch = req.body
-	console.log(0 == false)
 
 	// Make the call to Unsplash API URL
 	if (Object.getOwnPropertyNames(userSearch).length != 0) { // In case the search form was filled by the user
@@ -32,7 +31,7 @@ function getPhotoByName(req, res) {
 			.catch(err => console.error(err))
 
 	} else { // In case the user doesn't type any value
-		res.status(400).json({message: 'You must enter a search value'})
+		res.status(400).json({message: 'You must enter a search value', status: res.statusCode})
 	}
 }
 
