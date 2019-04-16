@@ -45,20 +45,6 @@ function getProductByName(req, res) {
 	})
 }
 
-// Get product/s by cost
-// function getProductByCost(req, res) {
-// 	const productCost = req.body.cost
-// 	console.log(productCost)
-
-// 	db.query(query.getProductByCost, productCost, (err, data) => {
-
-// 		if (err) return res.status(500).json({message: `Error getting the product: ${err}`})
-// 		else if (!data[0]) return res.status(404).json({message: 'Product not found!'})
-
-// 		return res.status(200).json({product: data[0]})
-// 	})
-// }
-
 // Method to create a new product
 function newProduct(req, res) {
 
