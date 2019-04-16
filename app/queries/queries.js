@@ -1,6 +1,8 @@
 const dbQueries = {
 	product: {
 		getProducts: 'call getAllProducts();',
+		getUserProducts: 'call getUserProducts();',
+		getProductsCount: 'call getProductsCount();',
 		getProduct: 'call getOneProduct(?);',
 		getProductByName: 'call getProductByName(?);',
 		newProduct: 'call newProduct(?, ?, ?);',
