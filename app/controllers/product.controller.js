@@ -2,12 +2,25 @@ const mysql = require('mysql')
 const db = require('../db/db-connection')
 const query = require('../queries/queries')
 
-// Get all products
-function getProducts(req, res) {
+// Get all products (admin)
+function getAdminProducts(req, res) {
 
 	let { getProducts } = query.product
 
 	db.query(getProducts, (err, products) => {
+
+		if (err) return res.status(500).send({message: `Error getting the products: Server doesn't work ${err}`})
+
+		return res.status(200).json({products: products[0]})
+	})
+}
+
+// Get all products (user)
+function getUserProducts(req, res) {
+
+	let { getUserProducts } = query.product
+
+	db.query(getUserProducts, (err, products) => {
 
 		if (err) return res.status(500).send({message: `Error getting the products: Server doesn't work ${err}`})
 
@@ -40,6 +53,19 @@ function getProductByName(req, res) {
 
 		if (err) return res.status(500).json({message: `Error getting the product: ${err}`})
 		else if (!data[0].length) return res.status(404).json({message: 'Product not found!'})
+
+		return res.status(200).json({product: data[0]})
+	})
+}
+
+// Method to get total number of products
+function getProductsCount(req, res) {
+
+	let { getProductsCount } = query.product
+
+	db.query(getProductsCount, (err, data) => {
+
+		if (err) return res.status(500).json({message: `Error getting the product count: ${err}`})
 
 		return res.status(200).json({product: data[0]})
 	})
@@ -118,7 +144,9 @@ function removeProducts(req, res) {
 }
 
 module.exports = {
-	getProducts,
+	getAdminProducts,
+	getUserProducts,
+	getProductsCount,
 	getProduct,
 	getProductByName,
 	newProduct,
