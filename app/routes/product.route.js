@@ -4,7 +4,8 @@ const product = require('../controllers/product.controller')
 
 // Endpoints
 productRouter.get('/products/name', product.getProductByName) // Get product by name
-productRouter.get('/products', product.getProducts) // Get all products
+productRouter.get('/products/admin', product.getAdminProducts) // Get all products (admin)
+productRouter.get('/products', product.getUserProducts) // Get all products (user)
 productRouter.get('/products/:product_id', product.getProduct) // Get just one product
 productRouter.post('/products', product.newProduct) // Create new product
 productRouter.put('/products/:product_id', product.updateProduct) // Update an existing product
