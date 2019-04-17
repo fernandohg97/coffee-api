@@ -10,6 +10,7 @@ function getAdminProducts(req, res) {
 	db.query(getProducts, (err, products) => {
 
 		if (err) return res.status(500).send({message: `Error getting the products: Server doesn't work ${err}`})
+		else if (!products[0].length) return res.status(404).send({ message: 'Products not found!'})
 
 		return res.status(200).json({products: products[0]})
 	})
@@ -23,6 +24,7 @@ function getUserProducts(req, res) {
 	db.query(getUserProducts, (err, products) => {
 
 		if (err) return res.status(500).send({message: `Error getting the products: Server doesn't work ${err}`})
+		else if (!products[0].length) return res.status(404).send({ message: 'Products not found!'})
 
 		return res.status(200).json({products: products[0]})
 	})
@@ -49,12 +51,27 @@ function getProductByName(req, res) {
 	let { getProductByName } = query.product
 	let { product_name } = req.body
 
-	db.query(getProductByName, product_name, (err, data) => {
+	db.query(getProductByName, product_name, (err, product) => {
 
 		if (err) return res.status(500).json({message: `Error getting the product: ${err}`})
-		else if (!data[0].length) return res.status(404).json({message: 'Product not found!'})
+		else if (!product[0].length) return res.status(404).json({message: 'Product/s not found!'})
 
-		return res.status(200).json({product: data[0]})
+		return res.status(200).json({product: product[0]})
+	})
+}
+
+// Get product/s by category
+function getProductByCategory(req, res) {
+
+	let { getProductByCategory } = query.product
+	let { category_id } = req.body
+
+	db.query(getProductByCategory, category_id, (err, products) => {
+
+		if (err) return res.status(500).send({ message: `Error getting the products: ${err}`})
+		else if (!products[0].length) return res.status(404).send({ message: 'Product/s not found'})
+
+		return res.status(200).json({ products: products[0]})
 	})
 }
 
@@ -146,9 +163,10 @@ function removeProducts(req, res) {
 module.exports = {
 	getAdminProducts,
 	getUserProducts,
-	getProductsCount,
 	getProduct,
 	getProductByName,
+	getProductByCategory,
+	getProductsCount,
 	newProduct,
 	updateProduct,
 	removeProduct,
