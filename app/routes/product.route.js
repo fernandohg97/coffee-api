@@ -4,6 +4,7 @@ const product = require('../controllers/product.controller')
 
 // Endpoints
 productRouter.get('/products/name', product.getProductByName) // Get product by name
+productRouter.get('/products/category', product.getProductByCategory) // Get product/s by category
 productRouter.get('/products/admin', product.getAdminProducts) // Get all products (admin)
 productRouter.get('/products', product.getUserProducts) // Get all products (user)
 productRouter.get('/products/:product_id', product.getProduct) // Get just one product
