@@ -5,6 +5,7 @@ const dbQueries = {
 		getProductsCount: 'call getProductsCount();',
 		getProduct: 'call getOneProduct(?);',
 		getProductByName: 'call getProductByName(?);',
+		getProductByCategory: 'call getProductByCategory(?);',
 		newProduct: 'call newProduct(?, ?, ?);',
 		updateProduct: 'call updateProduct(?, ?, ?, ?);',
 		removeProduct: 'call removeProduct(?);',
@@ -20,6 +21,16 @@ const dbQueries = {
 	sku: {
 		newSku: 'call newSku(?, ?);',
 		updateSku: 'call updateSku(?, ?);'
+	},
+	category: {
+		getCategories: 'call getCategories();',
+		getOneCategory: 'call getOneCategory(?);',
+		newCategory: 'call newCategory(?);',
+		updateCategory: 'call updateCategory(?, ?);',
+		removeCategory: 'call removeCategory(?);'
+	},
+	coffeeBean: {
+		getCoffeeBean: 'call getCoffeeBean();'
 	}
 }
 
