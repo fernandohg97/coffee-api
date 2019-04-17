@@ -94,17 +94,18 @@ function newProduct(req, res) {
 	let { newProduct } = query.product // New product SP query
 	let { newVariantValues } = query.variant_values // New variant values SP query
 	let { newSku } = query.sku // New sku SP query
-	let { product_name, description, product_image, variant_id, value_name, price} = req.body // Get all the from values from the body
+	let { product_name, description, product_image, category_id, variant_id, value_name, price} = req.body // Get all the from values from the body
 	product_image = product_image || null
 
 	let lastInsertId = { toSqlString: function() { return '(select last_insert_id())' } }
 
 	// Create product full query formatted
-	let createQuery = mysql.format(`${newProduct} ${newVariantValues} ${newSku}`, [product_name, description, product_image, value_name, lastInsertId, variant_id, price, lastInsertId])
+	let createQuery = mysql.format(`${newProduct} ${newVariantValues} ${newSku}`, [product_name, description, product_image, category_id, value_name, lastInsertId, variant_id, price, lastInsertId])
 
 	db.query(createQuery, (err, data) => {
-		if (err) return res.status(500).send({message: `Error creating the product ${err}`})
 
+		if (err) return res.status(500).send({message: `Error creating the product ${err}`})
+		console.log(data)
 		return res.status(200).send({message: 'Product successfully created'})
 	})
 

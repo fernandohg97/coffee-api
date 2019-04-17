@@ -6,7 +6,7 @@ const dbQueries = {
 		getProduct: 'call getOneProduct(?);',
 		getProductByName: 'call getProductByName(?);',
 		getProductByCategory: 'call getProductByCategory(?);',
-		newProduct: 'call newProduct(?, ?, ?);',
+		newProduct: 'call newProduct(?, ?, ?, ?);',
 		updateProduct: 'call updateProduct(?, ?, ?, ?);',
 		removeProduct: 'call removeProduct(?);',
 		removeProducts: 'call removeAllProducts();'
