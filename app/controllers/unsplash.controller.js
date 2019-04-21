@@ -17,7 +17,7 @@ function getPhotoByName(req, res) {
 	let userSearch = req.body
 
 	// Make the call to Unsplash API URL
-	if (Object.getOwnPropertyNames(userSearch).length != 0) { // In case the search form was filled by the user
+	if (Object.keys(userSearch).length != 0) { // In case the search form was filled by the user
 
 		fetch(`${res.locals.unsplashUrl}&query=${userSearch.keyword}`)
 			.then(checkStatus)
@@ -35,7 +35,23 @@ function getPhotoByName(req, res) {
 	}
 }
 
+function getUserPhotos(req, res) {
+
+	// Make the call to Unsplash API URL
+	fetch(`${res.locals.unsplashUrl}&stats=true`)
+		.then(checkStatus)
+		.then(body => {
+			if (!body.length) {
+				res.status(404).send({ message: body.message })
+			} else {
+				res.send(body)
+			}
+		})
+		.catch(err => console.error(err))
+}
+
 module.exports = {
 	getPhotos,
-	getPhotoByName
+	getPhotoByName,
+	getUserPhotos
 }
