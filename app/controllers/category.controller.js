@@ -19,7 +19,7 @@ function getCategories(req, res) {
 function getCategory(req, res) {
 
 	let { getOneCategory } = query.category
-	let categoryId = req.params.category_id
+	let { categoryId } = req.params
 
 	db.query(getOneCategory, categoryId, (err, category) => {
 
@@ -38,10 +38,8 @@ function newCategory(req, res) {
 
 	db.query(newCategory, category_name, (err, response) => {
 
-		if (err) return res.status(500).send({message: `Error creating the product: ${err}`})
+		err ? res.status(500).send({ message: `There was an error: ${err.sqlMessage}` }) : res.status(200).send({message: 'Category successfully created'})
 
-		console.log(response)
-		return res.status(200).send({message: 'Category successfully created'})
 	})
 }
 

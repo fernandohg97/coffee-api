@@ -12,6 +12,7 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-validator": "^5.3.1",
     "http-errors": "^1.7.2",
     "method-override": "^3.0.0",
     "morgan": "^1.9.1",
@@ -19,5 +20,8 @@
     "node-fetch": "^2.3.0",
     "nodemon": "^1.18.10",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "express-livereload": "0.0.24"
   }
 }

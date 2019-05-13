@@ -6,6 +6,7 @@ const dbQueries = {
 		getProduct: 'call getOneProduct(?);',
 		getProductByName: 'call getProductByName(?);',
 		getProductByCategory: 'call getProductByCategory(?);',
+		getProductVariants: 'call getProductVariants();',
 		newProduct: 'call newProduct(?, ?, ?, ?);',
 		updateProduct: 'call updateProduct(?, ?, ?, ?);',
 		removeProduct: 'call removeProduct(?);',
@@ -16,7 +17,8 @@ const dbQueries = {
 	},
 	variant_values: {
 		newVariantValues: 'call newVariantValues(?, ?, ?);',
-		updateVariantValues: 'call updateVariantValues(?, ?, ?);'
+		updateVariantValues: 'call updateVariantValues(?, ?, ?);',
+		removeVariantValues: 'call removeVariantValues(?);'
 	},
 	sku: {
 		newSku: 'call newSku(?, ?);',
@@ -28,9 +30,6 @@ const dbQueries = {
 		newCategory: 'call newCategory(?);',
 		updateCategory: 'call updateCategory(?, ?);',
 		removeCategory: 'call removeCategory(?);'
-	},
-	coffeeBean: {
-		getCoffeeBean: 'call getCoffeeBean();'
 	}
 }
 

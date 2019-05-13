@@ -5,7 +5,7 @@ const logger = require('morgan')
 const methodOverride = require('method-override')
 
 // Declare app local variable
-app.locals.title = 'Coffee Menu'
+app.locals.title = 'Coffee Shop'
 
 // Define app settings
 app.set('env', process.env.NODE_ENV || 'development')
@@ -41,18 +41,15 @@ app.use(require('./middlewares/auth').isAuth)
 const unsplashRouter = require('./routes/unsplash.route')
 const productRouter = require('./routes/product.route')
 const categoryRouter = require('./routes/category.route')
+const homeRouter = require('./routes/home.route')
 
 app.use('/unsplash', unsplashRouter) // Prefix route for unsplash endpoints
 app.use('/api', [productRouter, categoryRouter]) // Prefix route for product endpoints
+app.use('/', homeRouter)
 
 // Handle 404 Http errors
 app.use((req, res, next) => {
-
-	return res.status(404).json({message: 'Resource not found', status: res.statusCode})
-
+	return res.status(404).json({ message: 'Resource not found', status: res.statusCode })
 })
-
-// Middleware to handle main route
-// app.use('/', (req, res) => { res.render('index') })
 
 module.exports = app

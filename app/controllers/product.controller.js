@@ -9,10 +9,10 @@ function getAdminProducts(req, res) {
 
 	db.query(getProducts, (err, products) => {
 
-		if (err) return res.status(500).send({message: `Error getting the products: Server doesn't work ${err}`})
-		else if (!products[0].length) return res.status(404).send({ message: 'Products not found!'})
+		if (err) return res.status(500).send({ message: `Error getting the products: Server doesn't work ${err}` })
+		else if (!products[0].length) return res.status(404).send({ message: 'Products not found!' })
 
-		return res.status(200).json({products: products[0]})
+		return res.status(200).json({ products: products[0] })
 	})
 }
 
@@ -23,10 +23,10 @@ function getUserProducts(req, res) {
 
 	db.query(getUserProducts, (err, products) => {
 
-		if (err) return res.status(500).send({message: `Error getting the products: Server doesn't work ${err}`})
-		else if (!products[0].length) return res.status(404).send({ message: 'Products not found!'})
+		if (err) return res.status(500).send({ message: `Error getting the products: Server doesn't work ${err}` })
+		else if (!products[0].length) return res.status(404).send({ message: 'Products not found!' })
 
-		return res.status(200).json({products: products[0]})
+		return res.status(200).json({ products: products[0] })
 	})
 }
 
@@ -38,10 +38,10 @@ function getProduct(req, res) {
 
 	db.query(getProduct, product_id, (err, data) => {
 
-		if (err) return res.status(500).json({message: `Error getting the product: ${err}`})
-		else if (!data[0].length) return res.status(404).json({message: 'Product not found!'})
+		if (err) return res.status(500).json({ message: `Error getting the product: ${err}` })
+		else if (!data[0].length) return res.status(404).json({ message: 'Product not found!' })
 
-		return res.status(200).json({product: data[0]})
+		return res.status(200).json({ product: data[0] })
 	})
 }
 
@@ -53,10 +53,10 @@ function getProductByName(req, res) {
 
 	db.query(getProductByName, product_name, (err, product) => {
 
-		if (err) return res.status(500).json({message: `Error getting the product: ${err}`})
-		else if (!product[0].length) return res.status(404).json({message: 'Product/s not found!'})
+		if (err) return res.status(500).json({ message: `Error getting the product: ${err}` })
+		else if (!product[0].length) return res.status(404).json({ message: 'Product/s not found! '})
 
-		return res.status(200).json({product: product[0]})
+		return res.status(200).json({ product: product[0] })
 	})
 }
 
@@ -64,7 +64,7 @@ function getProductByName(req, res) {
 function getProductByCategory(req, res) {
 
 	let { getProductByCategory } = query.product
-	let { category_id } = req.body
+	let { category_id } = req.params
 
 	db.query(getProductByCategory, category_id, (err, products) => {
 
@@ -82,56 +82,54 @@ function getProductsCount(req, res) {
 
 	db.query(getProductsCount, (err, data) => {
 
-		if (err) return res.status(500).json({message: `Error getting the product count: ${err}`})
+		if (err) return res.status(500).json({ message: `Error getting the product count: ${err}` })
 
-		return res.status(200).json({product: data[0]})
+		return res.status(200).json({ product: data[0] })
+	})
+}
+
+//Method to get all product variants
+function getProductVariants(req, res) {
+
+	let { getProductVariants } = query.product
+
+	db.query(getProductVariants, (err, variants) => {
+
+		if (err) return res.status(500).send({ message: `There was an error getting the product variants: ${err}` })
+		else if (!variants[0].length) return res.status(404).send({ message: 'Variants not found!' })
+
+		return res.status(200).send({ variants: variants[0] })
 	})
 }
 
 // Method to create a new product
 function newProduct(req, res) {
 
-	let { newProduct } = query.product // New product SP query
-	let { newVariantValues } = query.variant_values // New variant values SP query
-	let { newSku } = query.sku // New sku SP query
-	let { product_name, description, product_image, category_id, variant_id, value_name, price} = req.body // Get all the from values from the body
+	let { newProduct } = query.product
+	let { product_name, description, product_image, category_id } = req.body
 	product_image = product_image || null
 
-	let lastInsertId = { toSqlString: function() { return '(select last_insert_id())' } }
+	db.query(newProduct, [product_name, description, product_image, category_id], (err, product) => {
 
-	// Create product full query formatted
-	let createQuery = mysql.format(`${newProduct} ${newVariantValues} ${newSku}`, [product_name, description, product_image, category_id, value_name, lastInsertId, variant_id, price, lastInsertId])
+		if (err) return res.status(500).send({ message: `There was an error: ${err}` })
 
-	db.query(createQuery, (err, data) => {
-
-		if (err) return res.status(500).send({message: `Error creating the product ${err}`})
-		console.log(data)
-		return res.status(200).send({message: 'Product successfully created'})
+		return res.status(200).send({ message: 'Product successfully created' })
 	})
-
 }
 
 // Method to update an existing product
 function updateProduct(req, res) {
 
 	let { updateProduct } = query.product
-	let { updateVariantValues} = query.variant_values
-	let { updateSku } = query.sku
+	let { product_name, description, product_image, category_id } = req.body
+	let { product_id } = req.params
 
-	const productId = req.params.product_id // Get the product id to be updated
-	let { product_name, description, product_image, variant_id, value_name, price} = req.body // Get all the from values from the body
-	product_image = product_image || null
+	db.query(updateProduct, [product_id, product_name, description, product_image, category_id], (err, data) => {
 
-	// Update product full query formatted
-	let updateQuery = mysql.format(updateProduct + updateVariantValues + updateSku, [productId, product_name, description, product_image, value_name, productId, variant_id, price, productId])
+		if (err) return res.status(500).send({ message:`There was an error updating the product: ${err}` })
 
-	db.query(updateQuery, (err, data) => {
-		if (err) return res.status(500).json({message: `Error updating the product: ${err}`})
+		return res.status(200).send({ message: 'Product successfully updated' })
 
-		return res.status(200).json({
-			message: 'Product successfully updated!',
-			product: data[0]
-		})
 	})
 }
 
@@ -139,13 +137,13 @@ function updateProduct(req, res) {
 function removeProduct(req, res) {
 
 	let { removeProduct } = query.product
-	const productId = req.params.product_id
+	const { product_id } = req.params
 
-	db.query(removeProduct, productId, (err, data) => {
-		if (err) return res.status(500).json({message: `Error removing the product: ${err}`})
-		console.log(data[0])
+	db.query(removeProduct, product_id, (err, data) => {
 
-		return res.status(200).json({message: 'Product successfully removed!'})
+		if (err) return res.status(500).json({ message: `Error removing the product: ${err}` })
+
+		return res.status(200).json({ message: 'Product successfully removed!' })
 	})
 }
 
@@ -155,9 +153,74 @@ function removeProducts(req, res) {
 	let { removeProducts } = query.product
 
 	db.query(removeProducts, (err, data) => {
-		if (err) return res.status(500).send({message: `Error removing all the products: ${err}`})
 
-		return res.status(200).send({message: 'Products successfully removed'})
+		if (err) return res.status(500).send({ message: `Error removing all the products: ${err}` })
+
+		return res.status(200).send({ message: 'Products successfully removed' })
+	})
+}
+
+// Method to create new variant
+function newVariant(req, res) {
+
+	let { newVariant } = query.variant
+	let { variant_name } = req.body
+
+	db.query(newVariant, variant_name, (err, data) => {
+
+		if (err) return res.status(500).send({ message: `There was an error creating the variant: ${err}` })
+
+		return res.status(200).send({ message: 'Variant successfully created' })
+	})
+}
+
+// Method to add variant to a product
+function addVariant(req, res) {
+
+	let { newVariantValues } = query.variant_values
+	let { newSku } = query.sku
+	let { value_name, variant_id, price } = req.body
+	let { product_id } = req.params
+
+	let sql = mysql.format(`${newVariantValues} ${newSku}`, [value_name, product_id, variant_id, price, product_id])
+
+	db.query(sql, (err, data) => {
+
+		if (err) return res.status(500).send({ message: `There was an error creating the product variant: ${err}` })
+
+		return res.status(500).send({ message: 'Product variant successfully created' })
+	})
+}
+
+// Method to edit an existing varaint from a product
+function updateVariant(req, res) {
+
+	let { updateVariantValues } = query.variant_values
+	let { updateSku } = query.sku
+	let { value_name, variant_id, price } = req.body
+	let { product_id } = req.params
+
+	let sql = mysql.format(`${updateVariantValues} ${updateSku}`, [value_name, product_id, variant_id, price, product_id])
+
+	db.query(sql, (err, data) => {
+
+		if (err) return res.status(500).send({ message: `There was an error updating the product variant: ${err}` })
+
+		return res.status(500).send({ message: 'Product variant successfully updated' })
+	})
+}
+
+// Method to remove variant value from a product
+function removeVariant(req, res) {
+
+	let { removeVariantValues } = query.variant_values
+	let { value_id } = req.params
+
+	db.query(removeVariantValues, value_id, (err, data) => {
+
+		if (err) return res.status(500).send({ message: `There was an error removing the product variant: ${err}` })
+
+		return res.status(500).send({ message: 'Product variant successfully removed' })
 	})
 }
 
@@ -168,8 +231,13 @@ module.exports = {
 	getProductByName,
 	getProductByCategory,
 	getProductsCount,
+	getProductVariants,
 	newProduct,
+	newVariant,
 	updateProduct,
 	removeProduct,
-	removeProducts
+	removeProducts,
+	addVariant,
+	updateVariant,
+	removeVariant
 }
