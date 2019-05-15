@@ -29,7 +29,8 @@ const dbQueries = {
 		getOneCategory: 'call getOneCategory(?);',
 		newCategory: 'call newCategory(?);',
 		updateCategory: 'call updateCategory(?, ?);',
-		removeCategory: 'call removeCategory(?);'
+		removeCategory: 'call removeCategory(?);',
+		removeCategories: 'call removeCategories();'
 	}
 }
 
