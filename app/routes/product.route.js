@@ -31,8 +31,11 @@ productRouter.post('/products/variants', [
 productRouter.post('/products/variants/:product_id', [
 	check('value_name').isAlphanumeric(),
 	check('variant_id').isInt(),
-	check('price').isFloat()
 ], errorHandler, product.addVariant) // Add new product variant
+
+productRouter.post('/products/variants/price/:product_id', [
+	check('price').isFloat()
+], errorHandler, product.addPrice) // Set price to product
 
 productRouter.put('/products/:product_id', [
 	check('product_name').isAlphanumeric(),
