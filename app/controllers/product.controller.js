@@ -178,17 +178,33 @@ function newVariant(req, res) {
 function addVariant(req, res) {
 
 	let { newVariantValues } = query.variant_values
-	let { newSku } = query.sku
-	let { value_name, variant_id, price } = req.body
+	// let { newSku } = query.sku
+	let { value_name, variant_id } = req.body
 	let { product_id } = req.params
 
-	let sql = mysql.format(`${newVariantValues} ${newSku}`, [value_name, product_id, variant_id, price, product_id])
+	// let sql = mysql.format(`${newVariantValues} ${newSku}`, [value_name, product_id, variant_id, price, product_id])
+	let sql = mysql.format(`${newVariantValues}`, [value_name, product_id, variant_id])
+
 
 	db.query(sql, (err, data) => {
 
 		if (err) return res.status(500).send({ message: `There was an error creating the product variant: ${err}` })
 
-		return res.status(500).send({ message: 'Product variant successfully created' })
+		return res.status(200).send({ message: 'Product variant successfully created' })
+	})
+}
+
+function addPrice(req, res) {
+
+	let { newSku } = query.sku
+	let { price } = req.body
+	let { product_id } = req.params
+
+	db.query(newSku, [price, product_id], (err, data) => {
+
+		if (err) return res.status(500).send({ message: `Error setting the price to product: ${err}` })
+
+		return res.status(200).send({ message: 'Price successfully created '})
 	})
 }
 
@@ -238,6 +254,7 @@ module.exports = {
 	removeProduct,
 	removeProducts,
 	addVariant,
+	addPrice,
 	updateVariant,
 	removeVariant
 }
