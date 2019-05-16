@@ -160,85 +160,7 @@ function removeProducts(req, res) {
 	})
 }
 
-// Method to create new variant
-function newVariant(req, res) {
 
-	let { newVariant } = query.variant
-	let { variant_name } = req.body
-
-	db.query(newVariant, variant_name, (err, data) => {
-
-		if (err) return res.status(500).send({ message: `There was an error creating the variant: ${err}` })
-
-		return res.status(200).send({ message: 'Variant successfully created' })
-	})
-}
-
-// Method to add variant to a product
-function addVariant(req, res) {
-
-	let { newVariantValues } = query.variant_values
-	// let { newSku } = query.sku
-	let { value_name, variant_id } = req.body
-	let { product_id } = req.params
-
-	// let sql = mysql.format(`${newVariantValues} ${newSku}`, [value_name, product_id, variant_id, price, product_id])
-	let sql = mysql.format(`${newVariantValues}`, [value_name, product_id, variant_id])
-
-
-	db.query(sql, (err, data) => {
-
-		if (err) return res.status(500).send({ message: `There was an error creating the product variant: ${err}` })
-
-		return res.status(200).send({ message: 'Product variant successfully created' })
-	})
-}
-
-function addPrice(req, res) {
-
-	let { newSku } = query.sku
-	let { price } = req.body
-	let { product_id } = req.params
-
-	db.query(newSku, [price, product_id], (err, data) => {
-
-		if (err) return res.status(500).send({ message: `Error setting the price to product: ${err}` })
-
-		return res.status(200).send({ message: 'Price successfully created '})
-	})
-}
-
-// Method to edit an existing varaint from a product
-function updateVariant(req, res) {
-
-	let { updateVariantValues } = query.variant_values
-	let { updateSku } = query.sku
-	let { value_name, variant_id, price } = req.body
-	let { product_id } = req.params
-
-	let sql = mysql.format(`${updateVariantValues} ${updateSku}`, [value_name, product_id, variant_id, price, product_id])
-
-	db.query(sql, (err, data) => {
-
-		if (err) return res.status(500).send({ message: `There was an error updating the product variant: ${err}` })
-
-		return res.status(500).send({ message: 'Product variant successfully updated' })
-	})
-}
-
-// Method to remove variant value from a product
-function removeVariant(req, res) {
-
-	let { removeVariantValues } = query.variant_values
-	let { value_id } = req.params
-
-	db.query(removeVariantValues, value_id, (err, data) => {
-
-		if (err) return res.status(500).send({ message: `There was an error removing the product variant: ${err}` })
-
-		return res.status(500).send({ message: 'Product variant successfully removed' })
-	})
-}
 
 module.exports = {
 	getAdminProducts,
@@ -249,12 +171,7 @@ module.exports = {
 	getProductsCount,
 	getProductVariants,
 	newProduct,
-	newVariant,
 	updateProduct,
 	removeProduct,
-	removeProducts,
-	addVariant,
-	addPrice,
-	updateVariant,
-	removeVariant
+	removeProducts
 }
