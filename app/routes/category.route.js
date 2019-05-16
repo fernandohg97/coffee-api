@@ -6,14 +6,19 @@ const errorHandler = require('../middlewares/errors/error.validation').handleErr
 
 // ENDPOINTS
 categoryRouter.get('/categories', categoryCtrl.getCategories) // Get all categories
+
 categoryRouter.get('/categories/:category_id', categoryCtrl.getCategory) // Get one category
+
 categoryRouter.post('/categories', [
 	check('category_name').not().isEmpty()
 ], errorHandler, categoryCtrl.newCategory) // Create new category
+
 categoryRouter.put('/categories/:category_id', [
 	check('category_name').not().isEmpty()
 ], errorHandler, categoryCtrl.updateCategory) // Update a category
+
 categoryRouter.delete('/categories/:category_id', categoryCtrl.removeCategory) // Remove a category
+
 categoryRouter.delete('/categories', categoryCtrl.removeCategories) // Remove all categories
 
 module.exports = categoryRouter
