@@ -18,23 +18,23 @@ variantRouter.post('/variants', [
 variantRouter.post('/variants/product/:product_id', [
 	check('value_name').isAlphanumeric(),
 	check('variant_id').isInt(),
-], errorHandler, variantCtrl.addVariant) // Add new product variant
+], errorHandler, variantCtrl.addVariant) // Add new product variant value
 
 variantRouter.post('/variants/price/:product_id', [
 	check('price').isFloat()
 ], errorHandler, variantCtrl.addPrice) // Set price to product
 
-variantRouter.put('/variants/:product_id', [
+variantRouter.put('/variants/:variant_id', [
+	check('variant_name').not().isEmpty()
+], errorHandler, variantCtrl.updateVariant) // Update a variant name
+
+variantRouter.put('/variants/product/:product_id', [
 	check('value_name').isAlphanumeric(),
 	check('variant_id').isInt(),
 	check('price').isFloat()
-], errorHandler, variantCtrl.updateVariant) // Update an exisitng variant from a product
+], errorHandler, variantCtrl.updateVariantValue) // Update an exisitng variant from a product
 
-variantRouter.put('/variants/:variant_id', [
-	check('variant_name').not().isEmpty()
-], errorHandler, variantCtrl.updateVariant)
-
-variantRouter.delete('/variants/:value_id', variantCtrl.removeVariantValue) // Remove existing variant from a product
+variantRouter.delete('/variants/value/:value_id', variantCtrl.removeVariantValue) // Remove existing variant from a product
 
 variantRouter.delete('/variants/:variant_id', variantCtrl.removeVariant) // Remove existing variant name
 
