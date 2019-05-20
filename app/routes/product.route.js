@@ -13,7 +13,7 @@ productRouter.get('/products/name', [
 
 productRouter.get('/products/admin', productCtrl.getAdminProducts) // Get all products (admin)
 
-productRouter.get('/products/variants', productCtrl.getProductVariants) // Get all product variants
+// productRouter.get('/products/variants', productCtrl.getProductVariants) // Get all product variants
 
 productRouter.get('/products/category/:category_id', productCtrl.getProductByCategory) // Get product/s by category
 
