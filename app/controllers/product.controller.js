@@ -89,6 +89,7 @@ function getProductsCount(req, res) {
 }
 
 //Method to get all product variants
+// TODO: Watch this method
 function getProductVariants(req, res) {
 
 	let { getProductVariants } = query.product
@@ -99,6 +100,20 @@ function getProductVariants(req, res) {
 		else if (!variants[0].length) return res.status(404).send({ message: 'Variants not found!' })
 
 		return res.status(200).send({ variants: variants[0] })
+	})
+}
+
+// Method to get variant values for an specific sku_id
+function getProductVariantValues(req, res) {
+
+	let { getProductVariantValuesBySku } = query.product
+	let { sku_id } = req.params
+
+	db.query(getProductVariantValuesBySku, sku_id, (err, data) => {
+
+		if (err) return res.status(500).send({ message: `There was an error getting product variant values by sku: ${err}` })
+
+		return res.status(200).send({ data: data[0] })
 	})
 }
 
@@ -170,6 +185,7 @@ module.exports = {
 	getProductByCategory,
 	getProductsCount,
 	getProductVariants,
+	getProductVariantValues,
 	newProduct,
 	updateProduct,
 	removeProduct,
