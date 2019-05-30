@@ -41,10 +41,11 @@ app.use(require('./middlewares/auth').isAuth)
 const unsplashRouter = require('./routes/unsplash.route')
 const productRouter = require('./routes/product.route')
 const categoryRouter = require('./routes/category.route')
+const variantRouter = require('./routes/variant.route')
 const homeRouter = require('./routes/home.route')
 
 app.use('/unsplash', unsplashRouter) // Prefix route for unsplash endpoints
-app.use('/api', [productRouter, categoryRouter]) // Prefix route for product endpoints
+app.use('/api', [productRouter, categoryRouter, variantRouter]) // Prefix route for product endpoints
 app.use('/', homeRouter)
 
 // Handle 404 Http errors
