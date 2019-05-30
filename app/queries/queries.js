@@ -7,6 +7,7 @@ const dbQueries = {
 		getProductByName: 'call getProductByName(?);',
 		getProductByCategory: 'call getProductByCategory(?);',
 		getProductVariants: 'call getProductVariants();',
+		getProductVariantValuesBySku: 'call getProductVariantValuesBySkuId(?);',
 		newProduct: 'call newProduct(?, ?, ?, ?);',
 		updateProduct: 'call updateProduct(?, ?, ?, ?);',
 		removeProduct: 'call removeProduct(?);',
@@ -20,14 +21,17 @@ const dbQueries = {
 		removeVariant: 'call removeVariant(?);'
 	},
 	variant_values: {
-		getVariantValues: 'select value_id, value_name, product_id, variant_id from variant_values where product_id = ?;',
+		getVariantValues: 'call getVariantValues();',
+		getVariantValuesByProduct: 'select value_id, value_name, product_id, variant_id from variant_values where product_id = ?;',
+		getVariantValuesByName: 'call getVariantValuesByName(?, ?);',
 		newVariantValues: 'call newVariantValues(?, ?, ?);',
 		updateVariantValues: 'call updateVariantValues(?, ?, ?);',
 		removeVariantValues: 'call removeVariantValues(?);'
 	},
 	sku: {
-		newSku: 'call newSku(?, ?);',
-		updateSku: 'call updateSku(?, ?);'
+		newSku: 'call newSku(?, ?, ?, @insertId); select @insertId;',
+		newSkuValues: 'INSERT INTO sku_values (sku_id, value_id) values ?;',
+		updateSku: 'call updateSku(?, ?, ?, ?);'
 	},
 	category: {
 		getCategories: 'call getCategories();',
