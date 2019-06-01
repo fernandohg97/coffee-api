@@ -16,6 +16,33 @@ function getVariants(req, res) {
 	})
 }
 
+// Method to get all variant values
+function getVariantValues(req, res) {
+
+	let { getVariantValues } = query.variant_values
+
+	db.query(getVariantValues, (err, data) => {
+
+		if (err) return res.status(500).send({ message: `Error getting variant values: ${err}` })
+		else if (!data[0].length) return res.status(404).send({ message: 'Variants not found!' })
+
+		return res.status(200).send({ variants_values: data[0] })
+	})
+}
+
+function getVariantsCountByProduct(req, res) {
+
+	let { getVariantsCountByProduct } = query.variant
+	let { product_id } = req.params
+
+	db.query(getVariantsCountByProduct, product_id, (err, variants) => {
+
+		return err ? res.status(500).send({ message: `Error getting total number of variants for product_id ${product_id}: ${err.sqlMessage} `})
+			: res.status(200).json({ data: variants[0] })
+
+	})
+}
+
 // Method to get variant name by variant id
 function getVariant(req, res) {
 
@@ -28,20 +55,6 @@ function getVariant(req, res) {
 		else if (!variant[0].length) return res.status(404).send({ message: 'Variant not found!' })
 
 		return res.status(200).send({ variant: variant[0] })
-	})
-}
-
-// Method to get all variant values
-function getVariantValues(req, res) {
-
-	let { getVariantValues } = query.variant_values
-
-	db.query(getVariantValues, (err, data) => {
-
-		if (err) return res.status(500).send({ message: `Error getting variant values: ${err}` })
-		else if (!data[0].length) return res.status(404).send({ message: 'Variants not found!' })
-
-		return res.status(200).send({ variants_values: data[0] })
 	})
 }
 
@@ -228,6 +241,7 @@ module.exports = {
 	getVariant,
 	getVariantValues,
 	getVariantsByProduct,
+	getVariantsCountByProduct,
 	newVariant,
 	newSku,
 	newVariantValue,
