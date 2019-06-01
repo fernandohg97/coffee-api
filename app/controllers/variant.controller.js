@@ -9,10 +9,9 @@ function getVariants(req, res) {
 
 	db.query(getVariants, (err, variants) => {
 
-		if (err) return res.status(500).send({ message: `Error getting all variants name: ${err}` })
-		else if (!variants[0].length) return res.status(404).send({ message: 'Variants not found!' })
-
-		return res.status(200).send({ variants: variants[0] })
+		return err ? res.status(500).send({ message: `Error getting all variants name: ${err}` })
+			: (!variants[0].length) ? res.status(404).send({ message: 'Variants not found!' })
+				: res.status(200).send({ variants: variants[0] })
 	})
 }
 
@@ -23,10 +22,9 @@ function getVariantValues(req, res) {
 
 	db.query(getVariantValues, (err, data) => {
 
-		if (err) return res.status(500).send({ message: `Error getting variant values: ${err}` })
-		else if (!data[0].length) return res.status(404).send({ message: 'Variants not found!' })
-
-		return res.status(200).send({ variants_values: data[0] })
+		return err ? res.status(500).send({ message: `Error getting variant values: ${err}` })
+			: (!data[0].length) ? res.status(404).send({ message: 'Variants not found!' })
+				: res.status(200).send({ variants_values: data[0] })
 	})
 }
 
@@ -51,10 +49,9 @@ function getVariant(req, res) {
 
 	db.query(getVariant, variant_id, (err, variant) => {
 
-		if (err) return res.status(500).send({ message: `Error getting the variant name: ${err}` })
-		else if (!variant[0].length) return res.status(404).send({ message: 'Variant not found!' })
-
-		return res.status(200).send({ variant: variant[0] })
+		return err ? res.status(500).send({ message: `Error getting the variant name: ${err}` })
+			: (!variant[0].length) ? res.status(404).send({ message: 'Variant not found!' })
+				: res.status(200).send({ variant: variant[0] })
 	})
 }
 
@@ -68,8 +65,6 @@ function getVariantsByProduct(req, res) {
 
 		if (err) return res.status(500).send({ message: `Error from server: ${err}` })
 		else if (!data) return res.status(404).send({ message: `Variant values not found for product_id: ${product_id}` })
-
-		console.log(data)
 
 		let variantValues = data // Assign retrieved data from database
 		let groupVariants = [] // Array to group variants of the same product
@@ -108,9 +103,8 @@ function newVariant(req, res) {
 
 	db.query(newVariant, variant_name, (err, data) => {
 
-		if (err) return res.status(500).send({ message: `There was an error creating the variant: ${err}` })
-
-		return res.status(200).send({ message: 'Variant successfully created' })
+		return err ? res.status(500).send({ message: `There was an error creating the variant: ${err}` })
+			: res.status(200).send({ message: 'Variant successfully created' })
 	})
 }
 
@@ -123,9 +117,8 @@ function newVariantValue(req, res) {
 
 	db.query(newVariantValues, [value_name, product_id, variant_id], (err, data) => {
 
-		if (err) return res.status(500).send({ message: `There was an error creating the product variant: ${err}` })
-
-		return res.status(200).send({ message: 'Product variant successfully created' })
+		return err ? res.status(500).send({ message: `There was an error creating the product variant: ${err}` })
+			: res.status(200).send({ message: 'Product variant successfully created' })
 	})
 }
 
@@ -172,9 +165,8 @@ function updateSku(req, res) {
 
 	db.query(updateSku, [sku_id, sku, price, product_id], (err, data) => {
 
-		if (err) return res.status(500).send({ message: `Error updating the price to product: ${err}` })
-
-		return res.status(200).send({ message: 'Sku & price successfully updated' })
+		return err ? res.status(500).send({ message: `Error updating the price to product: ${err}` })
+			: res.status(200).send({ message: 'Sku & price successfully updated' })
 	})
 }
 
@@ -187,9 +179,8 @@ function updateVariant(req, res) {
 
 	db.query(updateVariant, [variant_id, variant_name], (err, data) => {
 
-		if (err) return res.status(500).send({ message: `Error updating the variant: ${err}` })
-
-		return res.status(200).send({ message: 'Variant successfully updated' })
+		return err ? res.status(500).send({ message: `Error updating the variant: ${err}` })
+			: res.status(200).send({ message: 'Variant successfully updated' })
 	})
 }
 
@@ -202,9 +193,8 @@ function updateVariantValue(req, res) {
 
 	db.query(updateVariantValues, [value_id, value_name, variant_id], (err, data) => {
 
-		if (err) return res.status(500).send({ message: `There was an error updating the product variant: ${err}` })
-
-		return res.status(200).send({ message: 'Product variant value successfully updated' })
+		return err ? res.status(500).send({ message: `There was an error updating the product variant: ${err}` })
+			: res.status(200).send({ message: 'Product variant value successfully updated' })
 	})
 }
 
@@ -216,9 +206,8 @@ function removeVariant(req, res) {
 
 	db.query(removeVariant, variant_id, (err, data) => {
 
-		if (err) return res.status(500).send({ message: `Error removing the variant: ${err}` })
-
-		return res.status(200).send({ message: 'Variant successfully removed' })
+		return err ? res.status(500).send({ message: `Error removing the variant: ${err}` })
+			: res.status(200).send({ message: 'Variant successfully removed' })
 	})
 }
 
@@ -230,9 +219,8 @@ function removeVariantValue(req, res) {
 
 	db.query(removeVariantValues, value_id, (err, data) => {
 
-		if (err) return res.status(500).send({ message: `There was an error removing the product variant: ${err}` })
-
-		return res.status(200).send({ message: 'Product variant successfully removed' })
+		return err ? res.status(500).send({ message: `There was an error removing the product variant: ${err}` })
+			: res.status(200).send({ message: 'Product variant successfully removed' })
 	})
 }
 
