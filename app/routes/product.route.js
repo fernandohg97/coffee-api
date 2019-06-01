@@ -7,19 +7,21 @@ const errorHandler = require('../middlewares/errors/error.validation').handleErr
 // Endpoints
 productRouter.get('/products', productCtrl.getUserProducts) // Get all products (user)
 
-productRouter.get('/products/count', productCtrl.getProductsCount) // Get total number of products
+productRouter.get('/products/admin', productCtrl.getAdminProducts) // Get all products (admin)
 
 productRouter.get('/products/name', [
 	check('product_name').not().isEmpty()
 ], errorHandler, productCtrl.getProductByName) // Get products by name
 
-productRouter.get('/products/admin', productCtrl.getAdminProducts) // Get all products (admin)
+productRouter.get('/products/sku', productCtrl.getProductSku) // Get products with sku and price
 
-productRouter.get('/products/variants/values/:sku_id', productCtrl.getProductVariantValues) // Get all product variants
+productRouter.get('/products/count', productCtrl.getProductsCount) // Get total number of products
+
+productRouter.get('/products/:product_id', productCtrl.getProduct) // Get just one product
 
 productRouter.get('/products/category/:category_id', productCtrl.getProductByCategory) // Get product/s by category
 
-productRouter.get('/products/:product_id', productCtrl.getProduct) // Get just one product
+productRouter.get('/products/variants/values/:sku_id', productCtrl.getProductVariantValues) // Get all product variants
 
 productRouter.post('/products', [
 	check('product_name').isAlphanumeric(),
