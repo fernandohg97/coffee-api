@@ -17,7 +17,7 @@ const dbQueries = {
 	variant: {
 		getVariants: 'call getVariants();',
 		getVariant: 'call getVariant(?);',
-		getVariantsCount: 'call getVariantsCountByProduct(?);',
+		getVariantsCountByProduct: 'call getVariantsCountByProduct(?);',
 		newVariant: 'call newVariant(?);',
 		updateVariant: 'call updateVariant(?, ?);',
 		removeVariant: 'call removeVariant(?);'
