@@ -10,26 +10,23 @@ app.locals.title = 'Coffee Shop'
 // Define app settings
 app.set('env', process.env.NODE_ENV || 'development')
 app.set('views', path.join(__dirname, '/views'))
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs') // Set EJS as the view template engine
 
 // Default middlewares
-app.use(methodOverride('X-HTTP-Method-Override'))
-app.use(express.static(path.join(__dirname, '/public')))
-app.use(logger('dev'))
-app.use(express.urlencoded({extended: false}))
-app.use(express.json())
+app.use(methodOverride('X-HTTP-Method-Override')) // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+app.use(express.static(path.join(__dirname, '/public'))) // Store static files inside ./public folder
+app.use(logger('dev')) // Logs requests from the client set in development mode
+app.use(express.urlencoded({ extended: false })) // Set all parsed data is nothing unusual.
+app.use(express.json()) // Parse request body from client to JSON.
 
 
 // Error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
 	console.error('error: ' + err.stack)
-	res.render('error', {
-		error: err
-	})
 })
 
 // Send default header for unsplash API
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
 	res.set('Accept-Version', 'v1')
 	next()
 })
@@ -44,9 +41,10 @@ const categoryRouter = require('./routes/category.route')
 const variantRouter = require('./routes/variant.route')
 const homeRouter = require('./routes/home.route')
 
+// Set prefix route to the different Routers
 app.use('/unsplash', unsplashRouter) // Prefix route for unsplash endpoints
 app.use('/api', [productRouter, categoryRouter, variantRouter]) // Prefix route for product endpoints
-app.use('/', homeRouter)
+app.use('/', homeRouter) // Prefix route for home routes
 
 // Handle 404 Http errors
 app.use((req, res, next) => {
