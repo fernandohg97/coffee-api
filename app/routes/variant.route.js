@@ -14,6 +14,8 @@ variantRouter.get('/variants/:variant_id', variantCtrl.getVariant) // Get varian
 
 variantRouter.get('/variants/product/:product_id', variantCtrl.getVariantsByProduct) // Get all variants group by product id
 
+variantRouter.get('/variants/product/total/:product_id', variantCtrl.getVariantsCountByProduct) // Get total number of variants by product
+
 variantRouter.post('/variants', [
 	check('variant_name').isAlpha()
 ], errorHandler, variantCtrl.newVariant) // Create new variant
