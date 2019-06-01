@@ -8,10 +8,9 @@ function getCategories(req, res) {
 
 	db.query(getCategories, (err, categories) => {
 
-		if (err) return res.status(500).send({ message: `Error from the server getting the categories: ${err}` })
-		else if (!categories[0].length) return res.status(404).send({ message: 'Categories not found!' })
-
-		return res.status(200).json({categories: categories[0]})
+		return err ? res.status(500).send({ message: `Error from the server getting the categories: ${err}` })
+			: (!categories[0].length) ? res.status(404).send({ message: 'Categories not found!' })
+				: res.status(200).json({ categories: categories[0] })
 	})
 }
 
@@ -23,10 +22,10 @@ function getCategory(req, res) {
 
 	db.query(getOneCategory, category_id, (err, category) => {
 
-		if (err) return res.status(500).send({ message: `Error from the server getting the category: ${err}` })
-		else if (!category[0].length) return res.status(404).send({ message: 'Category not found!' })
+		return err ? res.status(500).send({ message: `Error from the server getting the category: ${err}` })
+			: (!category[0].length) ? res.status(404).send({ message: 'Category not found!' })
+				: res.status(200).json({ category: category[0] })
 
-		return res.status(200).json({ category: category[0] })
 	})
 }
 
@@ -38,7 +37,8 @@ function newCategory(req, res) {
 
 	db.query(newCategory, category_name, (err, response) => {
 
-		err ? res.status(500).send({ message: `There was an error: ${err.sqlMessage}` }) : res.status(200).send({ message: 'Category successfully created' })
+		return err ? res.status(500).send({ message: `There was an error: ${err.sqlMessage}` })
+			: res.status(200).send({ message: 'Category successfully created' })
 
 	})
 }
@@ -52,9 +52,9 @@ function updateCategory(req, res) {
 
 	db.query(updateCategory, [category_id, category_name], (err, response) => {
 
-		if (err) return res.status(500).send({ message: `Error updating the category: ${err}` })
+		return err ? res.status(500).send({ message: `There was an error: ${err.sqlMessage}` })
+			: res.status(200).send({ message: 'Category successfully updated' })
 
-		return res.status(200).send({ message: 'Category successfully updated' })
 	})
 }
 
@@ -66,21 +66,20 @@ function removeCategory(req, res) {
 
 	db.query(removeCategory, category_id, (err, response) => {
 
-		if (err) res.status(500).send({ message: `Error removing the category: ${err}` })
-
-		return res.status(200).send({ message: 'Category successfully removed' })
+		return err ? res.status(500).send({ message: `Error removing the category: ${err.sqlMessage}` })
+			: res.status(200).send({ message: 'Category successfully removed' })
 	})
 }
 
+// Method to remove all categories
 function removeCategories(req, res) {
 
 	let { removeCategories } = query.category
 
 	db.query(removeCategories, (err, response) => {
 
-		if (err) res.status(500).send({ message: `Error removing categories: ${err}` })
-
-		return res.status(200).send({ message: 'Categories successfully removed' })
+		return err ? res.status(500).send({ message: `Error removing categories: ${err.sqlMessage}` })
+			: res.status(200).send({ message: 'Categories successfully removed' })
 	})
 }
 
