@@ -2,20 +2,6 @@ const mysql = require('mysql')
 const db = require('../db/db-connection')
 const query = require('../queries/queries')
 
-// Get all products (admin)
-function getAdminProducts(req, res) {
-
-	let { getProducts } = query.product
-
-	db.query(getProducts, (err, products) => {
-
-		if (err) return res.status(500).send({ message: `Error getting the products: Server doesn't work ${err}` })
-		else if (!products[0].length) return res.status(404).send({ message: 'Products not found!' })
-
-		return res.status(200).json({ products: products[0] })
-	})
-}
-
 // Get all products (user)
 function getUserProducts(req, res) {
 
@@ -23,10 +9,62 @@ function getUserProducts(req, res) {
 
 	db.query(getUserProducts, (err, products) => {
 
-		if (err) return res.status(500).send({ message: `Error getting the products: Server doesn't work ${err}` })
-		else if (!products[0].length) return res.status(404).send({ message: 'Products not found!' })
+		return err ? res.status(500).send({ message: `Error getting the products: Server doesn't work ${err}` })
+			: (!products[0].length) ? res.status(404).send({ message: 'Products not found!' })
+				: res.status(200).json({ products: products[0] })
+	})
+}
 
-		return res.status(200).json({ products: products[0] })
+// Get all products (admin)
+function getAdminProducts(req, res) {
+
+	let { getProducts } = query.product
+
+	db.query(getProducts, (err, products) => {
+
+		return err ? res.status(500).send({ message: `Error getting the products: Server doesn't work ${err}` })
+			: (!products[0].length) ? res.status(404).send({ message: 'Products not found!' })
+				: res.status(200).json({ products: products[0] })
+	})
+}
+
+// Method to get all products with sku and price
+function getProductSku(req, res) {
+
+	let { getProductSku } = query.product
+
+	db.query(getProductSku, (err, products) => {
+
+		return err ? res.status(500).send({ message: `Error getting the products sku: ${err}` })
+			: (!products[0].length) ? res.status(404).send({ message: 'Products not found!' })
+				: res.status(200).json({ products: products[0] })
+	})
+}
+
+
+// Get product/s by name
+function getProductByName(req, res) {
+
+	let { getProductByName } = query.product
+	let { product_name } = req.body
+
+	db.query(getProductByName, product_name, (err, product) => {
+
+		return err ? res.status(500).json({ message: `Error getting the product: ${err}` })
+			: (!product[0].length) ? res.status(404).json({ message: 'Product/s not found! '})
+				: res.status(200).json({ product: product[0] })
+	})
+}
+
+// Method to get total number of products
+function getProductsCount(req, res) {
+
+	let { getProductsCount } = query.product
+
+	db.query(getProductsCount, (err, data) => {
+
+		return err ? res.status(500).json({ message: `Error getting the product count: ${err}` })
+			: res.status(200).json({ product: data[0] })
 	})
 }
 
@@ -38,25 +76,9 @@ function getProduct(req, res) {
 
 	db.query(getProduct, product_id, (err, data) => {
 
-		if (err) return res.status(500).json({ message: `Error getting the product: ${err}` })
-		else if (!data[0].length) return res.status(404).json({ message: 'Product not found!' })
-
-		return res.status(200).json({ product: data[0] })
-	})
-}
-
-// Get product/s by name
-function getProductByName(req, res) {
-
-	let { getProductByName } = query.product
-	let { product_name } = req.body
-
-	db.query(getProductByName, product_name, (err, product) => {
-
-		if (err) return res.status(500).json({ message: `Error getting the product: ${err}` })
-		else if (!product[0].length) return res.status(404).json({ message: 'Product/s not found! '})
-
-		return res.status(200).json({ product: product[0] })
+		return err ? res.status(500).json({ message: `Error getting the product: ${err}` })
+			: (!data[0].length) ? res.status(404).json({ message: 'Product not found!' })
+				: res.status(200).json({ product: data[0] })
 	})
 }
 
@@ -68,40 +90,26 @@ function getProductByCategory(req, res) {
 
 	db.query(getProductByCategory, category_id, (err, products) => {
 
-		if (err) return res.status(500).send({ message: `Error getting the products: ${err}`})
-		else if (!products[0].length) return res.status(404).send({ message: 'Product/s not found'})
-
-		return res.status(200).json({ products: products[0]})
-	})
-}
-
-// Method to get total number of products
-function getProductsCount(req, res) {
-
-	let { getProductsCount } = query.product
-
-	db.query(getProductsCount, (err, data) => {
-
-		if (err) return res.status(500).json({ message: `Error getting the product count: ${err}` })
-
-		return res.status(200).json({ product: data[0] })
+		return err ? res.status(500).send({ message: `Error getting the products: ${err}`})
+			: (!products[0].length) ? res.status(404).send({ message: 'Product/s not found'})
+				: res.status(200).json({ products: products[0]})
 	})
 }
 
 //Method to get all product variants
 // TODO: Watch this method
-function getProductVariants(req, res) {
+// function getProductVariants(req, res) {
 
-	let { getProductVariants } = query.product
+// 	let { getProductVariants } = query.product
 
-	db.query(getProductVariants, (err, variants) => {
+// 	db.query(getProductVariants, (err, variants) => {
 
-		if (err) return res.status(500).send({ message: `There was an error getting the product variants: ${err}` })
-		else if (!variants[0].length) return res.status(404).send({ message: 'Variants not found!' })
+// 		if (err) return res.status(500).send({ message: `There was an error getting the product variants: ${err}` })
+// 		else if (!variants[0].length) return res.status(404).send({ message: 'Variants not found!' })
 
-		return res.status(200).send({ variants: variants[0] })
-	})
-}
+// 		return res.status(200).send({ variants: variants[0] })
+// 	})
+// }
 
 // Method to get variant values for an specific sku_id
 function getProductVariantValues(req, res) {
@@ -109,11 +117,11 @@ function getProductVariantValues(req, res) {
 	let { getProductVariantValuesBySku } = query.product
 	let { sku_id } = req.params
 
-	db.query(getProductVariantValuesBySku, sku_id, (err, data) => {
+	db.query(getProductVariantValuesBySku, sku_id, (err, products) => {
 
-		if (err) return res.status(500).send({ message: `There was an error getting product variant values by sku: ${err}` })
-
-		return res.status(200).send({ data: data[0] })
+		return err ? res.status(500).send({ message: `There was an error getting product variant values by sku: ${err}` })
+			: (!products[0].length) ? res.status(404).send({ message: 'Product not found!' })
+				: res.status(200).json({ products: products[0] })
 	})
 }
 
@@ -126,9 +134,8 @@ function newProduct(req, res) {
 
 	db.query(newProduct, [product_name, description, product_image, category_id], (err, product) => {
 
-		if (err) return res.status(500).send({ message: `There was an error: ${err}` })
-
-		return res.status(200).send({ message: 'Product successfully created' })
+		return err ? res.status(500).send({ message: `There was an error: ${err}` })
+			: res.status(200).send({ message: 'Product successfully created' })
 	})
 }
 
@@ -141,9 +148,8 @@ function updateProduct(req, res) {
 
 	db.query(updateProduct, [product_id, product_name, description, product_image, category_id], (err, data) => {
 
-		if (err) return res.status(500).send({ message:`There was an error updating the product: ${err}` })
-
-		return res.status(200).send({ message: 'Product successfully updated' })
+		return err ? res.status(500).send({ message:`There was an error updating the product: ${err}` })
+			: res.status(200).send({ message: 'Product successfully updated' })
 
 	})
 }
@@ -156,9 +162,8 @@ function removeProduct(req, res) {
 
 	db.query(removeProduct, product_id, (err, data) => {
 
-		if (err) return res.status(500).json({ message: `Error removing the product: ${err}` })
-
-		return res.status(200).json({ message: 'Product successfully removed!' })
+		return err ? res.status(500).json({ message: `Error removing the product: ${err}` })
+			: res.status(200).json({ message: 'Product successfully removed!' })
 	})
 }
 
@@ -169,13 +174,10 @@ function removeProducts(req, res) {
 
 	db.query(removeProducts, (err, data) => {
 
-		if (err) return res.status(500).send({ message: `Error removing all the products: ${err}` })
-
-		return res.status(200).send({ message: 'Products successfully removed' })
+		return err ? res.status(500).send({ message: `Error removing all the products: ${err}` })
+			: res.status(200).send({ message: 'Products successfully removed' })
 	})
 }
-
-
 
 module.exports = {
 	getAdminProducts,
@@ -184,7 +186,8 @@ module.exports = {
 	getProductByName,
 	getProductByCategory,
 	getProductsCount,
-	getProductVariants,
+	getProductSku,
+	// getProductVariants,
 	getProductVariantValues,
 	newProduct,
 	updateProduct,
