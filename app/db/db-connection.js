@@ -6,7 +6,7 @@ function databaseConnection () {
 
 	db.connect(err => {
 		if (err) return console.error('There was an error connecting to the database')
-		else {console.log('Database successfully connected')}
+		else console.log('Database successfully connected')
 	})
 	return db
 }
