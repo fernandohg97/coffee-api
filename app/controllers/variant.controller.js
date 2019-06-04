@@ -104,7 +104,7 @@ function newVariant(req, res) {
 	db.query(newVariant, variant_name, (err, data) => {
 
 		return err ? res.status(500).send({ message: `There was an error creating the variant: ${err}` })
-			: res.status(200).send({ message: 'Variant successfully created' })
+			: res.status(201).send({ message: 'Variant successfully created' })
 	})
 }
 
@@ -118,7 +118,7 @@ function newVariantValue(req, res) {
 	db.query(newVariantValues, [value_name, product_id, variant_id], (err, data) => {
 
 		return err ? res.status(500).send({ message: `There was an error creating the product variant: ${err}` })
-			: res.status(200).send({ message: 'Product variant successfully created' })
+			: res.status(201).send({ message: 'Product variant successfully created' })
 	})
 }
 
@@ -148,7 +148,7 @@ function newSku(req, res) {
 
 				db.commit(function(err) {
 					if (err) db.rollback(err)
-					res.status(200).send({ message: 'Transaction complete!' })
+					res.status(201).send({ message: 'Transaction complete!' })
 					db.end()
 				})
 			})

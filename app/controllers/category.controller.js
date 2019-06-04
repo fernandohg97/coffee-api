@@ -38,7 +38,7 @@ function newCategory(req, res) {
 	db.query(newCategory, category_name, (err, response) => {
 
 		return err ? res.status(500).send({ message: `There was an error: ${err.sqlMessage}` })
-			: res.status(200).send({ message: 'Category successfully created' })
+			: res.status(201).send({ message: 'Category successfully created' })
 
 	})
 }

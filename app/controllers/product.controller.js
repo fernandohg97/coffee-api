@@ -135,7 +135,7 @@ function newProduct(req, res) {
 	db.query(newProduct, [product_name, description, product_image, category_id], (err, product) => {
 
 		return err ? res.status(500).send({ message: `There was an error: ${err}` })
-			: res.status(200).send({ message: 'Product successfully created' })
+			: res.status(201).send({ message: 'Product successfully created' })
 	})
 }
 
