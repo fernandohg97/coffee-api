@@ -21,25 +21,82 @@ You can implement it in you personal projects or commercial projects. Please, fe
 ## ENDPOINTS
 ### **Product endpoints**
 
-- Get user products /api/products
-- Get admin products /api/products/admin
-- Get products by product name /api/products/name
-- Get products sku /api/products/sku
-- Get products count /api/products/count
-- Get one product /api/products/:product_id
-- Get products by category /api/products/category/:category_id
-- Get product variant values by sku /api/products/variants/values/:sku_id
+- Get user products
+
+    - URL: /api/products
+    - Description: Retrieve all product name and description.
+
+- Get admin products
+
+    - URL: /api/products/admin
+    - Description: Retrieve all product id, product name, sku, description and image.
+
+- Get products by product name
+
+    - URL: /api/products/name
+    - Description: Retrieve all product name, description, image and category.
+
+- Get products sku
+
+    - URL: /api/products/sku
+    - Description: Retrieve all product name, description, sku and price.
+
+- Get products count
+
+    - URL: /api/products/count
+    - Description: Retrieve the total number of products.
+
+- Get one product
+
+    - URL: /api/products/:product_id
+    - Description: Retrieve product name, description, image and category.
+
+- Get products by category
+
+    - URL: /api/products/category/:category_id
+    - Description: Retrieve all product name, description, image and category.
+
+- Get product variant values by sku
+
+    - URL: /api/products/variants/values/:sku_id
+    - Description: Retrieve product name, description, sku, price and variant values.
 
 ### **Variant endpoints**
 
-- Get all variants name /api/variants
-- Get all variant values /api/variants/values
-- Get one variant /api/variants/:variant_id
-- Get all variant values by product /api/variants/product/:product_id
-- Get variants count by product /api/variants/product/total/:product_id
+- Get all variants name
+
+    - URL: /api/variants
+    - Description: Retrieve all variant id and variant name.
+
+- Get all variant values
+
+    - URL: /api/variants/values
+    - Description: Retrieve all value id, value name, product id and variant id.
+
+- Get one variant
+
+    - URL: /api/variants/:variant_id
+    - Description: Retreive variant id and variant name.
+
+- Get all variant values by product id
+
+    - URL: /api/variants/product/:product_id
+    - Description: Retrieve value names corresponding to the product.
+
+- Get variants count by product
+
+    - URL: /api/variants/product/total/:product_id
+    - Description: Retrieve the total number of variants by product.
 
 ### **Category endpoints**
 
-- Get all categories /api/categories
-- Get one category /api/categories/:category_id
+- Get all categories
+
+    - URL: /api/categories
+    - Description: Retrieve all category id and category name.
+
+- Get one category
+
+    - URL: /api/categories/:category_id
+    - Description: Retrieve category id and category name.
 
