@@ -24,7 +24,7 @@ productRouter.get('/products/category/:category_id', productCtrl.getProductByCat
 productRouter.get('/products/variants/values/:sku_id', productCtrl.getProductVariantValues) // Get all product variants
 
 productRouter.post('/products', [
-	check('product_name').isAlphanumeric(),
+	check('product_name').not().isEmpty(),
 	check('category_id').isInt()
 ], errorHandler, productCtrl.newProduct) // Create new product
 
