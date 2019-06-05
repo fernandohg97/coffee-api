@@ -142,14 +142,14 @@ function newSku(req, res) {
 			concatSkuIds.map(e => e.splice(0,0, insertSkuId)) // Concatenate the last inserted sku id at the first position in each array element
 			let skuIdsValuesIds = concatSkuIds.map(e => e.map(Number)) // Each element of the arrays parse it to Number
 
-			db.query(newSkuValues, [skuIdsValuesIds], (error, data) => {
+			db.query(newSkuValues, [skuIdsValuesIds], (err, data) => {
 
-				if (error) return res.status(500).send({ message: `Hubo un error al crear sku_values: ${error}` })
+				if (err) return res.status(500).send({ message: `Hubo un error al crear sku_values: ${err}` })
 
 				db.commit(function(err) {
 					if (err) db.rollback(err)
-					res.status(201).send({ message: 'Transaction complete!' })
-					db.end()
+					return res.status(201).send({ message: 'Transaction complete!' })
+					// db.end()
 				})
 			})
 		})
