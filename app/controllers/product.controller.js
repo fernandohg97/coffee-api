@@ -1,6 +1,7 @@
 const mysql = require('mysql')
 const db = require('../db/db-connection')
 const query = require('../queries/queries')
+const fs = require('fs')
 
 // Get all products (user)
 function getUserProducts(req, res) {
@@ -74,11 +75,11 @@ function getProduct(req, res) {
 	let { getProduct } = query.product
 	const { product_id } = req.params
 
-	db.query(getProduct, product_id, (err, data) => {
-
+	db.query(getProduct, product_id, (err, product) => {
+		// TODO: Add the image visulaization on browser
 		return err ? res.status(500).json({ message: `Error getting the product: ${err}` })
-			: (!data[0].length) ? res.status(404).json({ message: 'Product not found!' })
-				: res.status(200).json({ product: data[0] })
+			: (!product[0].length) ? res.status(404).json({ message: 'Product not found!' })
+				: res.status(200).json({ product: product[0][0] })
 	})
 }
 
