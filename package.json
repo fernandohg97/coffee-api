@@ -18,10 +18,9 @@
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "node-fetch": "^2.3.0",
-    "nodemon": "^1.18.10",
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "express-livereload": "0.0.24"
+    "nodemon": "^1.19.1"
   }
 }
