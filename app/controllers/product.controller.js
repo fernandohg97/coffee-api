@@ -46,11 +46,11 @@ function getProductSku(req, res) {
 function getProductSkuByName(req, res) {
 
 	let { getProductSkuByName } = query.product
-	let { product_name } = req.body
+	let { product_name } = req.query
 
 	db.query(getProductSkuByName, product_name, (err, product) => {
 
-		return err ? res.status(500).send({ message: `Error getting the product '${product_name}'` })
+		return err ? res.status(500).send({ message: `Error getting the product '${product_name}': ${err}` })
 			: (!product[0].length) ? res.status(404).send({ message: `Product ${product_name} not found!` })
 				: res.status(200).json({ product: product[0] })
 	})
