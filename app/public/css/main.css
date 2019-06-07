@@ -1,42 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
 html {
-    font-family: 'Simplifica', sans-serif;
+    font-family: 'Work Sans', sans-serif;
 }
 
 body {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-y: hidden;
 }
 
 .wrapper {
-    top: 30%;
+    width: 45%;
+    margin: 8%;
+    position: absolute;
+}
+
+.content-wrapper {
     position: relative;
 }
 
+.img-wrapper {
+    display: block;
+    top: 0;
+    right: 0;
+    margin: 0;
+    position: absolute;
+}
+
+.img-wrapper img {
+    width: 700px;
+    height: 550px;
+}
 
 .title {
     font-size: 80px;
-    width: 100%;
     display: block;
-    text-align: center;
-    animation-delay: 0.6s;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.subtitle {
+    font-size: 34px;
+    font-weight: 500;
+    display: block;
+    margin: 0;
+}
+.description {
+    font-size: 18px;
+    line-height: 1.6;
 }
 
+.user-input {
+    position: relative;
+}
 
-.menu-btn {
-    text-decoration: none;
-    font-family: 'Raleway';
-    font-weight: 600;
+.user-beverage {
+    display: inline-block;
+    width: 480px;
+    border: solid black;
+    border-width: 1.5px;
+    height: 50px;
+    margin-top: 1em;
+}
+
+.search-coffee-btn {
+    display: inline-block;
+    background: black;
+    font-size: 14px;
+    text-transform: uppercase;
     color: white;
-    background: #000000;
-    display: block;
-    text-align: center;
-    width: 17%;
-    padding: 0.5em 0;
-    margin: 0 auto;
-    animation-fill-mode: forwards;
-    animation-delay: 1.2s;
-    animation-duration: 1s;
+    text-decoration: none;
+    padding: 14px 22px;
+    height: 50px;
+    margin-left: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-coffee-btn:hover {
+    background: white;
+    color: black;
+    border: solid black;
+    border-width: 1.5px;
+}
+
+input[type="text"] {
+    padding-left: 15px;
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+::placeholder {
+    color: black;
+    font-weight: 300;
+    opacity: 0.6;
+    font-size: 16px;
+}
+
+.docs-footer {
+    position: relative;
+    bottom: -9em;
+}
+
+.docs-footer a {
+    text-decoration: none;
+    color: black;
+}
+
+.docs-footer a:hover {
+    color: grey;
 }
