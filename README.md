@@ -21,16 +21,16 @@ You can implement it in you personal projects or commercial projects. Please, fe
 ## ENDPOINTS
 ### **Product endpoints**
 
-- Get user products
+- Get all products
 
     - URL: /api/products
     - Description: Retrieve all product name and description.
 
-- Get admin products
+<!-- - Get admin products
 
     - URL: /api/products/admin
     - Description: Retrieve all product id, product name, sku, description and image.
-
+-->
 - Get products by product name
 
     - URL: /api/products/name
