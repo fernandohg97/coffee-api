@@ -1,9 +1,29 @@
 <html lang="es">
-    <% include partials/head %>
-    <body>
+<% include partials/head %>
+
+<body>
+    <div class="content-wrapper">
         <div class="wrapper">
-            <h1 class="title animated zoomIn">Welcome to <%= title %></h1>
-            <a class="menu-btn animated fadeInUp" href="/api/products" type="button">SEE MENU</a>
+            <h1 class="title"><%= title %></h1>
+            <h6 class="subtitle">For developers and coffee lovers.</h6>
+            <p class="description">
+                It is an open source RESTful API providing many coffee data.<br>
+                You can consume data as coffee beverages (latte, espresso, cappucino, cortado, and many others).
+            </p>
+            <div class="user-input">
+                <form action="http://localhost:3000/api/products/sku/name" method="GET">
+                    <input class="user-beverage" name="product_name" type="text" placeholder="Enter your favorite coffee beverage...">
+                    <button class="search-coffee-btn" type="submit">search</button>
+                </form>
+            </div>
+            <footer class="docs-footer">
+                <a href="https://github.com/fernandohg97/coffee-api" target="_blank">DOCS</a>
+            </footer>
         </div>
-    </body>
+        <div class="img-wrapper">
+            <img src="/img/coffee-home.jpg" alt="Coffee latte">
+        </div>
+    </div>
+
+</body>
 </html>
