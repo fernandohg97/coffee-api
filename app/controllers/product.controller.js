@@ -42,6 +42,20 @@ function getProductSku(req, res) {
 	})
 }
 
+// Method to get one product with sku and price by product name
+function getProductSkuByName(req, res) {
+
+	let { getProductSkuByName } = query.product
+	let { product_name } = req.body
+
+	db.query(getProductSkuByName, product_name, (err, product) => {
+
+		return err ? res.status(500).send({ message: `Error getting the product '${product_name}'` })
+			: (!product[0].length) ? res.status(404).send({ message: `Product ${product_name} not found!` })
+				: res.status(200).json({ product: product[0] })
+	})
+}
+
 
 // Get product/s by name
 function getProductByName(req, res) {
@@ -188,6 +202,7 @@ module.exports = {
 	getProductByCategory,
 	getProductsCount,
 	getProductSku,
+	getProductSkuByName,
 	// getProductVariants,
 	getProductVariantValues,
 	newProduct,
