@@ -7,6 +7,7 @@ const dbQueries = {
 		getProductByName: 'call getProductByName(?);',
 		getProductByCategory: 'call getProductByCategory(?);',
 		getProductSku: 'call getProductSku();',
+		getProductSkuByName: 'call getProductSkuByName(?);',
 		// getProductVariants: 'call getProductVariants();',
 		getProductVariantValuesBySku: 'call getProductVariantValuesBySkuId(?);',
 		newProduct: 'call newProduct(?, ?, ?, ?);',
