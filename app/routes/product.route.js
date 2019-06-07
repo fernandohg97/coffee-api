@@ -17,6 +17,10 @@ productRouter.get('/products/sku', productCtrl.getProductSku) // Get products wi
 
 productRouter.get('/products/count', productCtrl.getProductsCount) // Get total number of products
 
+productRouter.get('/products/sku/name', [
+	check('product_name').not().isEmpty()
+], errorHandler, productCtrl.getProductSkuByName) // Get one product with sku and price by product name
+
 productRouter.get('/products/:product_id', productCtrl.getProduct) // Get just one product
 
 productRouter.get('/products/category/:category_id', productCtrl.getProductByCategory) // Get product/s by category
