@@ -5,7 +5,7 @@ const logger = require('morgan')
 const methodOverride = require('method-override')
 
 // Declare app local variable
-app.locals.title = 'Coffee Shop'
+app.locals.title = 'COFFEE API'
 
 // Define app settings
 app.set('env', process.env.NODE_ENV || 'development')
