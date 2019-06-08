@@ -8,6 +8,7 @@ const methodOverride = require('method-override')
 app.locals.title = 'COFFEE API'
 
 // Define app settings
+app.set('version', 'v1') // Define app version
 app.set('env', process.env.NODE_ENV || 'development')
 app.set('views', path.join(__dirname, '/views'))
 app.set('view engine', 'ejs') // Set EJS as the view template engine
@@ -43,7 +44,7 @@ const homeRouter = require('./routes/home.route')
 
 // Set prefix route to the different Routers
 app.use('/unsplash', unsplashRouter) // Prefix route for unsplash endpoints
-app.use('/api', [productRouter, categoryRouter, variantRouter]) // Prefix route for product endpoints
+app.use(`/api/${app.get('version')}`, [productRouter, categoryRouter, variantRouter]) // Prefix route for product endpoints
 app.use('/', homeRouter) // Prefix route for home routes
 
 // Handle 404 Http errors
