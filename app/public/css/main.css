@@ -32,8 +32,8 @@ body {
 }
 
 .img-wrapper img {
-    width: 700px;
-    height: 550px;
+    width: 850px;
+    height: 650px;
 }
 
 .title {
@@ -69,7 +69,8 @@ body {
 .search-coffee-btn {
     display: inline-block;
     background: black;
-    font-size: 14px;
+    font-size: 16px;
+    font-family: 'Work Sans', sans-serif;
     text-transform: uppercase;
     color: white;
     text-decoration: none;
@@ -103,7 +104,7 @@ input[type="text"] {
 
 .docs-footer {
     position: relative;
-    bottom: -9em;
+    bottom: -15em;
 }
 
 .docs-footer a {
