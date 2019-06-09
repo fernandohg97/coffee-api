@@ -312,7 +312,7 @@ input[type="text"] {
     }
     .docs-footer {
         position: absolute;
-        bottom: -14em;
+        bottom: -10em;
     }
 }
 
