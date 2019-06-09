@@ -1,3 +1,4 @@
+/* General style */
 * {
     box-sizing: border-box;
 }
@@ -13,100 +14,63 @@ body {
     overflow-y: hidden;
 }
 
-.wrapper {
-    width: 45%;
-    margin: 8%;
-    position: absolute;
-}
-
 .content-wrapper {
     position: relative;
-}
-
-.img-wrapper {
-    display: block;
-    top: 0;
-    right: 0;
-    margin: 0;
-    position: absolute;
-}
-
-.img-wrapper img {
-    width: 850px;
-    height: 650px;
+    height: 100vh;
 }
 
 .title {
-    font-size: 80px;
     display: block;
     padding: 0;
-    margin-bottom: 20px;
 }
+
 .subtitle {
-    font-size: 34px;
-    font-weight: 500;
     display: block;
     margin: 0;
+    padding: 0;
+    font-weight: 500;
 }
 .description {
-    font-size: 18px;
     line-height: 1.6;
 }
 
 .user-input {
     position: relative;
 }
-
 .user-beverage {
-    display: inline-block;
-    width: 480px;
-    border: solid black;
+    display: block;
     border-width: 1.5px;
+    border: solid black;
     height: 50px;
-    margin-top: 1em;
 }
-
 .search-coffee-btn {
-    display: inline-block;
+    display: block;
     background: black;
-    font-size: 16px;
     font-family: 'Work Sans', sans-serif;
     text-transform: uppercase;
     color: white;
     text-decoration: none;
-    padding: 14px 22px;
-    height: 50px;
-    margin-left: 20px;
     border: none;
     cursor: pointer;
+    height: 50px;
 }
-
 .search-coffee-btn:hover {
     background: white;
     color: black;
     border: solid black;
     border-width: 1.5px;
 }
-
-input[type="text"] {
-    padding-left: 15px;
-    color: black;
-    font-weight: 500;
-    font-size: 16px;
-}
-
 ::placeholder {
     color: black;
     font-weight: 300;
     opacity: 0.6;
-    font-size: 16px;
+    font-family: 'Work Sans', sans-serif;
 }
-
-.docs-footer {
-    position: relative;
-    bottom: -15em;
+input[type="text"] {
+    color: black;
+    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
 }
-
 .docs-footer a {
     text-decoration: none;
     color: black;
@@ -115,3 +79,242 @@ input[type="text"] {
 .docs-footer a:hover {
     color: grey;
 }
+/* End general style */
+
+/* For small devices */
+@media only screen and (max-width: 640px) {
+    .wrapper {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+        padding-top: 3.5em;
+    }
+    .img-wrapper {
+        max-width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .img-wrapper img {
+        width: 90%;
+        height: 35%;
+        margin-top: 1.5em;
+    }
+
+    .title {
+        font-size: 40px;
+        margin-top: 0.7em;
+        margin-bottom: 15px;
+    }
+    .subtitle {
+        font-size: 24px;
+    }
+    .description {
+        font-size: 16px;
+        margin-bottom: 2em;
+    }
+
+    /* User input */
+    .user-beverage {
+        width: 100%;
+    }
+    .search-coffee-btn {
+        font-size: 14px;
+        padding: 10px 18px;
+        height: 40px;
+        margin-top: 20px;
+    }
+
+    input[type="text"] {
+        padding-left: 12px;
+        color: black;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    ::placeholder {
+        font-size: 14px;
+    }
+
+    .docs-footer {
+        position: absolute;
+        top: 2em;
+    }
+    .docs-footer a {
+        font-size: 14px;
+    }
+}
+
+/* For medium devices */
+@media only screen and (min-width: 641px) and (max-width: 1199px) {
+    .wrapper {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+        padding-top: 3.5em;
+    }
+    .img-wrapper {
+        max-width: 60%;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .img-wrapper img {
+        width: 90%;
+        height: 45%;
+        margin-top: 2em;
+    }
+
+    .title {
+        font-size: 40px;
+        margin-top: 0.7em;
+        margin-bottom: 15px;
+    }
+    .subtitle {
+        font-size: 24px;
+    }
+    .description {
+        font-size: 16px;
+        margin-bottom: 2em;
+    }
+
+    /* User input */
+    .user-beverage {
+        width: 70%;
+        display: inline-block;
+    }
+    .search-coffee-btn {
+        display: inline-block;
+        font-size: 16px;
+        padding: 14px 22px;
+        margin-left: 20px;
+    }
+
+    input[type="text"] {
+        padding-left: 12px;
+        color: black;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    ::placeholder {
+        font-size: 16px;
+    }
+
+    .docs-footer {
+        position: absolute;
+        top: 2em;
+    }
+    .docs-footer a {
+        font-size: 14px;
+    }
+}
+
+
+/* For large devices */
+@media only screen and (min-width: 1200px) {
+    .wrapper {
+        width: 45%;
+        margin: 8%;
+        position: absolute;
+    }
+    .img-wrapper {
+        width: 45%;
+        display: block;
+        top: 7em;
+        right: 0;
+        margin: 0;
+        position: absolute;
+    }
+    .img-wrapper img {
+        width: 100%;
+        height: 60%;
+    }
+    .title {
+        font-size: 80px;
+        margin-bottom: 20px;
+    }
+    .subtitle {
+        font-size: 34px;
+    }
+    .description {
+        font-size: 18px;
+    }
+    .user-beverage {
+        width: 90%;
+        margin-top: 2em;
+    }
+    .search-coffee-btn {
+        font-size: 16px;
+        padding: 14px 22px;
+        margin-top: 20px;
+    }
+    ::placeholder {
+        font-size: 16px;
+    }
+    input[type="text"] {
+        padding-left: 15px;
+        font-size: 16px;
+    }
+    .docs-footer {
+        position: absolute;
+        bottom: -6em;
+    }
+}
+
+/* For very large devices */
+@media only screen and (min-width: 1299px) {
+    .wrapper {
+        width: 45%;
+        margin: 8%;
+        position: absolute;
+    }
+    .img-wrapper {
+        width: 45%;
+        display: block;
+        top: 0;
+        right: 0;
+        margin: 0;
+        position: absolute;
+    }
+    .img-wrapper img {
+        width: 100%;
+        height: 65%;
+    }
+    .title {
+        font-size: 80px;
+        margin-bottom: 20px;
+    }
+    .subtitle {
+        font-size: 34px;
+    }
+    .description {
+        font-size: 18px;
+    }
+    .user-beverage {
+        display: inline-block;
+        /* width: 480px; */
+        width: 60%;
+        margin-top: 2em;
+    }
+    .search-coffee-btn {
+        display: inline-block;
+        font-size: 16px;
+        padding: 14px 22px;
+        margin-left: 20px;
+    }
+    ::placeholder {
+        font-size: 16px;
+    }
+    input[type="text"] {
+        padding-left: 15px;
+        font-size: 16px;
+    }
+    .docs-footer {
+        position: absolute;
+        bottom: -14em;
+    }
+}
+
+
+
