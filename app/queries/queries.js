@@ -8,7 +8,6 @@ const dbQueries = {
 		getProductByCategory: 'call getProductByCategory(?);',
 		getProductSku: 'call getProductSku();',
 		getProductSkuByName: 'call getProductSkuByName(?);',
-		// getProductVariants: 'call getProductVariants();',
 		getProductVariantValuesBySku: 'call getProductVariantValuesBySkuId(?);',
 		newProduct: 'call newProduct(?, ?, ?, ?);',
 		updateProduct: 'call updateProduct(?, ?, ?, ?);',
@@ -25,7 +24,7 @@ const dbQueries = {
 	},
 	variant_values: {
 		getVariantValues: 'call getVariantValues();',
-		getVariantValuesByProduct: 'select value_id, value_name, product_id, variant_id from variant_values where product_id = ?;',
+		getVariantValuesByProduct: 'call getVariantValuesByProduct(?);',
 		getVariantValuesByName: 'call getVariantValuesByName(?, ?);',
 		newVariantValues: 'call newVariantValues(?, ?, ?);',
 		updateVariantValues: 'call updateVariantValues(?, ?, ?);',
