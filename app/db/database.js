@@ -3,6 +3,6 @@ module.exports = {
 	host: 'localhost',
 	port: 3306,
 	user: 'root',
-	password: 'Qarrusel1!',
+	password: 'Qarrusel1!', // Enter your own password
 	multipleStatements: true
 }
