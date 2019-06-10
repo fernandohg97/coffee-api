@@ -23,7 +23,7 @@ You can implement it in you personal projects or commercial projects. Please, fe
 
 - Get all products
 
-    - URL: /api/products
+    - URL: /api/v1/products
     - Description: Retrieve all product name and description.
 
 <!-- - Get admin products
@@ -33,70 +33,79 @@ You can implement it in you personal projects or commercial projects. Please, fe
 -->
 - Get products by product name
 
-    - URL: /api/products/name
+    - URL: /api/v1/products/name
     - Description: Retrieve all product name, description, image and category.
 
 - Get products sku
 
-    - URL: /api/products/sku
+    - URL: /api/v1/products/sku
     - Description: Retrieve all product name, description, sku and price.
 
 - Get products count
 
-    - URL: /api/products/count
+    - URL: /api/v1/products/count
     - Description: Retrieve the total number of products.
 
 - Get one product
 
-    - URL: /api/products/:product_id
+    - URL: /api/v1/products/:product_id
     - Description: Retrieve product name, description, image and category.
 
 - Get products by category
 
-    - URL: /api/products/category/:category_id
+    - URL: /api/v1/products/category/:category_id
     - Description: Retrieve all product name, description, image and category.
 
 - Get product variant values by sku
 
-    - URL: /api/products/variants/values/:sku_id
+    - URL: /api/v1/products/variants/values/:sku_id
     - Description: Retrieve product name, description, sku, price and variant values.
 
 ### **Variant endpoints**
 
 - Get all variants name
 
-    - URL: /api/variants
+    - URL: /api/v1/variants
     - Description: Retrieve all variant id and variant name.
 
 - Get all variant values
 
-    - URL: /api/variants/values
+    - URL: /api/v1/variants/values
     - Description: Retrieve all value id, value name, product id and variant id.
 
 - Get one variant
 
-    - URL: /api/variants/:variant_id
+    - URL: /api/v1/variants/:variant_id
     - Description: Retreive variant id and variant name.
 
 - Get all variant values by product id
 
-    - URL: /api/variants/product/:product_id
+    - URL: /api/v1/variants/product/:product_id
     - Description: Retrieve value names corresponding to the product.
 
 - Get variants count by product
 
-    - URL: /api/variants/product/total/:product_id
+    - URL: /api/v1/variants/product/total/:product_id
     - Description: Retrieve the total number of variants by product.
 
 ### **Category endpoints**
 
 - Get all categories
 
-    - URL: /api/categories
+    - URL: /api/v1/categories
     - Description: Retrieve all category id and category name.
 
 - Get one category
 
-    - URL: /api/categories/:category_id
+    - URL: /api/v1/categories/:category_id
     - Description: Retrieve category id and category name.
 
+
+## Setup Guide
+
+1. Clone this repository `https://github.com/fernandohg97/coffee-api.git`.
+2. Edit database config in `app/db/database.js` setting your user and password.
+3. Run command `npm run createdb` to build the database.
+4. Run command `npm install` to install packages.
+5. Run command `npm start` to test the project.
+6. Go to `http://localhost:3000` in your browser.
