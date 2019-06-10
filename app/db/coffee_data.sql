@@ -1,4 +1,4 @@
-insert into category ('category_name')
+insert into category (category_name)
 values ('Espresso'),
 ('Filter');
 
@@ -55,3 +55,23 @@ values ('Espresso-2oz', 35, 1),
 ('Aeropress-10oz', 45, 10),
 ('Syphon-10oz', 56, 11),
 ('Syphon-12oz', 60, 11);
+
+insert into sku_values (sku_id, value_id)
+values (1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(7, 8),
+(8, 7),
+(8, 9),
+(9, 10),
+(10, 11),
+(11, 12),
+(12, 13),
+(13, 14),
+(14, 15),
+(15, 16),
+(16, 17);
