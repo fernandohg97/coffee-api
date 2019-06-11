@@ -101,7 +101,13 @@ You can implement it in you personal projects or commercial projects. Please, fe
     - Description: Retrieve category id and category name.
 
 
-## Setup Guide
+## Setup
+
+### Prerequisites
+
+- MySQL
+
+### **Installing**
 
 1. Clone this repository `https://github.com/fernandohg97/coffee-api.git`.
 2. Edit database config in `app/db/database.js` setting your user and password.
