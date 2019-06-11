@@ -115,3 +115,7 @@ You can implement it in you personal projects or commercial projects. Please, fe
 4. Run command `npm install` to install packages.
 5. Run command `npm start` to test the project.
 6. Go to `http://localhost:3000` in your browser.
+
+## License
+
+[MIT](https://github.com/fernandohg97/coffee-api/blob/master/LICENSE)
