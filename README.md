@@ -1,5 +1,7 @@
 # **COFFEE API**
 
+![Home page](homepage.svg)
+
 ## RESTful API PROVIDING COFFEE DATA
 
 ### **What is COFFEE API?**
