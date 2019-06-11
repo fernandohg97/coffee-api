@@ -6,7 +6,7 @@
 It is an open source RESTful API providing many coffee data.
 
 ### **What type of data?**
-You can consume data as coffee beverages (latte, espresso, cappuccino, cortado and many others.
+You can consume data as coffee beverages (latte, espresso, cappuccino, cortado and many others).
 
 ### **What’s the purpose of this project?**
 We built this project because we love coffee. So, if you are a developer and a coffee lover, we want it to share this data to you to use it in your projects for free.
