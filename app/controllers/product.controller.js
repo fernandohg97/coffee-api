@@ -3,12 +3,12 @@ const db = require('../db/db-connection')
 const query = require('../queries/queries')
 const fs = require('fs')
 
-// Get all products (user)
+// Get all products
 function getUserProducts(req, res) {
 
-	let { getUserProducts } = query.product
+	let { getProducts } = query.product
 
-	db.query(getUserProducts, (err, products) => {
+	db.query(getProducts, (err, products) => {
 
 		return err ? res.status(500).send({ message: `Error getting the products: Server doesn't work ${err}` })
 			: (!products[0].length) ? res.status(404).send({ message: 'Products not found!' })
@@ -16,12 +16,12 @@ function getUserProducts(req, res) {
 	})
 }
 
-// Get all products (admin)
+// Get resume products (name and description)
 function getAdminProducts(req, res) {
 
-	let { getProducts } = query.product
+	let { getUserProducts } = query.product
 
-	db.query(getProducts, (err, products) => {
+	db.query(getUserProducts, (err, products) => {
 
 		return err ? res.status(500).send({ message: `Error getting the products: Server doesn't work ${err}` })
 			: (!products[0].length) ? res.status(404).send({ message: 'Products not found!' })
