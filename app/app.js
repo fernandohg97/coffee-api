@@ -26,24 +26,14 @@ app.use((err, req, res, next) => {
 	console.error('error: ' + err.stack)
 })
 
-// Send default header for unsplash API
-app.use((req, res, next) => {
-	res.set('Accept-Version', 'v1')
-	next()
-})
-
-// Handle unsplash authorization
-app.use(require('./middlewares/auth').isAuth)
 
 // Routes
-const unsplashRouter = require('./routes/unsplash.route')
 const productRouter = require('./routes/product.route')
 const categoryRouter = require('./routes/category.route')
 const variantRouter = require('./routes/variant.route')
 const homeRouter = require('./routes/home.route')
 
 // Set prefix route to the different Routers
-app.use('/unsplash', unsplashRouter) // Prefix route for unsplash endpoints
 app.use(`/api/${app.get('version')}`, [productRouter, categoryRouter, variantRouter]) // Prefix route for product endpoints
 app.use('/', homeRouter) // Prefix route for home routes
 
