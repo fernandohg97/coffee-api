@@ -5,13 +5,16 @@ FROM node:latest
 WORKDIR /app
 
 # Copy the current directory contents into the container at . .
-COPY . .
+COPY package.json /app
+
 
 # Install any needed dependencies or packages specified in packaje.json
 RUN npm install
+
+COPY . /app
 
 # Make port 3000 available to the world outisde this container
 EXPOSE 3000
 
 # Run server.js when the container launches
-ENTRYPOINT ["node", "server.js"]
+CMD ["node", "server.js"]

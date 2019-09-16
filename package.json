@@ -1,7 +1,7 @@
 {
-  "name": "unsplash-app",
+  "name": "coffee-app",
   "version": "1.0.0",
-  "description": "Playing with Unsplash API",
+  "description": "Build Coffee API",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
