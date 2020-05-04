@@ -641,7 +641,7 @@ DROP function IF EXISTS `coffee_menu`.`setProductSku`;
 
 DELIMITER $$
 USE `coffee_menu`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `setProductSku`(productId int, lastValueId int) RETURNS char(100) CHARSET utf8
+CREATE DEFINER=`root`@`localhost` FUNCTION `setProductSku`(productId int, lastValueId int) RETURNS char(100) DETERMINISTIC
 begin
 
 	return concat('C', cast(productId as char(100)), cast(lastValueId as char(100)));
